@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 01-08-2017 03:09:53 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="edu.educomser.storage.pojo.Inscripcion" table="inscripcion" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="curso" class="edu.educomser.storage.pojo.Curso" fetch="select">
+            <column name="curso_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="estudiante" class="edu.educomser.storage.pojo.Estudiante" fetch="select">
+            <column name="estudiante_id" not-null="true" />
+        </many-to-one>
+        <property name="nota" type="java.lang.Integer">
+            <column name="nota" />
+        </property>
+    </class>
+</hibernate-mapping>
