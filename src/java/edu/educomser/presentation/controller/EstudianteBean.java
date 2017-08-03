@@ -15,39 +15,43 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import javax.faces.view.ViewScoped;
 /**
  *
  * @author Hugo
  */
 @Named(value = "estudianteBean")
 @RequestScoped
-public class EstudianteBean implements Serializable{
+public class EstudianteBean implements Serializable {
 
     private Estudiante estudiante;
     private List<Estudiante> listaEstudiantes;
-    
+
     @Autowired
     private EstudianteBo estudianteBo;
-    
-    public EstudianteBean(){
+
+    public EstudianteBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
-        estudiante=new Estudiante();
-        listaEstudiantes=estudianteBo.getAllEstudiantes();
+    public void init() {
+        estudiante = new Estudiante();
+        listaEstudiantes = estudianteBo.getAllEstudiantes();
     }
-    
-    public void guardarEstudiante(){
+
+    public void guardarEstudiante() {
         estudianteBo.save(estudiante);
+        listaEstudiantes = estudianteBo.getAllEstudiantes();
+        estudiante = new Estudiante();
         showMessage("Estudiante guardado exitosamente.");
-        estudiante=null;
-        listaEstudiantes=estudianteBo.getAllEstudiantes();
     }
     
-    public void showMessage(String mensaje){
-        FacesMessage message=new FacesMessage(FacesMessage.SEVERITY_INFO,mensaje,null);
+    public void refrescarTabla(){
+        listaEstudiantes = estudianteBo.getAllEstudiantes();
+    }
+
+    public void showMessage(String mensaje) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, mensaje, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
@@ -73,5 +77,5 @@ public class EstudianteBean implements Serializable{
 
     public void setListaEstudiantes(List<Estudiante> listaEstudiantes) {
         this.listaEstudiantes = listaEstudiantes;
-    }   
+    }
 }

@@ -15,7 +15,7 @@ public class EstudianteDaoImpl implements EstudianteDao {
     private SessionFactory sessionFactory;
     private Session sesion;
     private Transaction tx;
-    
+
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
@@ -37,9 +37,7 @@ public class EstudianteDaoImpl implements EstudianteDao {
             tx.rollback();
             System.out.println("Error al guardar: " + ex);
         } finally {
-            if (sesion != null) {
-                sesion.close();
-            }
+            sesion.close();
         }
     }
 
@@ -50,9 +48,7 @@ public class EstudianteDaoImpl implements EstudianteDao {
             iniciaOperacion();
             list = sesion.createQuery("from Estudiante").list();
         } finally {
-           if (sesion != null) {
-                sesion.close();
-            }
+            sesion.close();
         }
         return list;
     }

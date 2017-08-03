@@ -9,45 +9,54 @@
     </h:head>
     <h:body>
         <h1>Estudiantes</h1>
-        <h:form id="frmEstudiante">
-            <p:messages id="mensajes"/>
-            <p:panelGrid columns="3">
-                <p:outputLabel for="ci" value="CI:"/>
-                <p:inputText id="ci" value="#{estudianteBean.estudiante.ci}"
-                             size="20" required="true" label="CI"/>
-                <p:message for="ci" style="color:red"/>
+        <p:panel header="Nuevo estudiante">
+            <h:form id="frmEstudiante">
+                <p:growl/>
+                <p:messages id="msgMensajes"/>
+                <p:panelGrid columns="3">
+                    <p:outputLabel for="ci" value="CI:"/>
+                    <p:inputText id="ci" value="#{estudianteBean.estudiante.ci}"
+                                 size="20" required="true" label="CI"/>
+                    <p:message for="ci" style="color:red"/>
 
-                <p:outputLabel for="nombre" value="Nombre:"/>
-                <p:inputText id="nombre" value="#{estudianteBean.estudiante.nombre}"
-                             size="20" required="true" label="Nombre"/>
-                <p:message for="nombre" style="color:red"/>
+                    <p:outputLabel for="nombre" value="Nombre:"/>
+                    <p:inputText id="nombre" value="#{estudianteBean.estudiante.nombre}"
+                                 size="20" required="true" label="Nombre"/>
+                    <p:message for="nombre" style="color:red"/>
 
-                <p:outputLabel for="paterno" value="Paterno:"/>
-                <p:inputText id="paterno" value="#{estudianteBean.estudiante.paterno}"
-                             size="20" required="true" label="Paterno"/>
-                <p:message for="paterno" style="color:red"/>
+                    <p:outputLabel for="paterno" value="Paterno:"/>
+                    <p:inputText id="paterno" value="#{estudianteBean.estudiante.paterno}"
+                                 size="20" required="true" label="Paterno"/>
+                    <p:message for="paterno" style="color:red"/>
 
-                <p:outputLabel for="materno" value="Materno:"/>
-                <p:inputText id="materno" value="#{estudianteBean.estudiante.materno}"
-                             size="20" required="true" label="Materno"/>
-                <p:message for="materno" style="color:red"/>
+                    <p:outputLabel for="materno" value="Materno:"/>
+                    <p:inputText id="materno" value="#{estudianteBean.estudiante.materno}"
+                                 size="20" required="true" label="Materno"/>
+                    <p:message for="materno" style="color:red"/>
 
-                <p:outputLabel for="email" value="Email:"/>
-                <p:inputText id="email" value="#{estudianteBean.estudiante.email}"
-                             size="20" required="true" label="Email"/>
-                <p:message for="email" style="color:red"/>
+                    <p:outputLabel for="email" value="Email:"/>
+                    <p:inputText id="email" value="#{estudianteBean.estudiante.email}"
+                                 size="20" required="true" label="Email"/>
+                    <p:message for="email" style="color:red"/>
 
-                <p:outputLabel for="telefono" value="Telefono:"/>
-                <p:inputText id="telefono" value="#{estudianteBean.estudiante.telefono}"
-                             size="20" required="true" label="Telefono"/>
-                <p:message for="telefono" style="color:red"/>
-            </p:panelGrid>
-            <p:commandButton id="btn_guardar" 
-                             value="Guardar" action="#{estudianteBean.guardarEstudiante()}"
-                             update=":frmListaEstudiantes:tblEstudiantes :frmEstudiante"/>
-        </h:form>
+                    <p:outputLabel for="telefono" value="Telefono:"/>
+                    <p:inputText id="telefono" value="#{estudianteBean.estudiante.telefono}"
+                                 size="20" required="true" label="Telefono"/>
+                    <p:message for="telefono" style="color:red"/>
 
+                    <h:panelGroup/>
+                    <p:commandButton id="btn_guardar" 
+                                     value="Guardar" action="#{estudianteBean.guardarEstudiante()}"
+                                     update=":frmListaEstudiantes:tblEstudiantes frmEstudiante"/>
+                </p:panelGrid>            
+            </h:form>
+        </p:panel>
         <h:form id="frmListaEstudiantes">
+            <p:commandButton id="btn_refrescar" 
+                             value="Refrescar"
+                             action="#{estudianteBean.refrescarTabla()}"
+                             update="tblEstudiantes :frmEstudiante"
+                             icon="ui-icon-refresh"/>
             <p:dataTable id="tblEstudiantes" 
                          value="#{estudianteBean.listaEstudiantes}" 
                          var="estudiante">
